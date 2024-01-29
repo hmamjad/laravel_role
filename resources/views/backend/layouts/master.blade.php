@@ -10,6 +10,8 @@
 
     @include('backend.layouts.partials.styles')
 
+    @yield('styles')
+
 </head>
 
 <body>
@@ -50,6 +52,7 @@
     <!-- offset area end -->
 
     @include('backend.layouts.partials.scripts')
+    @yield('scripts')
    
 </body>
 

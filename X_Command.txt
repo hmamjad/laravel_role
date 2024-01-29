@@ -32,3 +32,9 @@ $permission->assignRole($role);
 https://spatie.be/docs/laravel-permission/v6/basic-usage/basic-usage  //link
 
 https://github.com/puikinsh/ElaAdmin 
+
+//part 4
+php artisan make:controller Backend/RolesController -r
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+ $roles =  Role::all();                  // $all_roles_in_database = Role::all()->pluck('name');
