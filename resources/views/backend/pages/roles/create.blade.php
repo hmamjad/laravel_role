@@ -38,13 +38,22 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Role Name</label>
-                                <input type="email" class="form-control" id="name"  placeholder="Enter A Role Name">
+                                <input type="text" class="form-control" id="name" name="name"  placeholder="Enter A Role Name">
                             </div>
-{{--                            
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div> --}}
+
+
+                            <div class="form-group">
+                                <label for="name">Permissions</label>
+                                @foreach ($permissions as $permission)
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission{{$permission->id}}" value="{{$permission->name}}">
+                                    <label class="form-check-label" for="checkPermission{{$permission->id}}">{{$permission->name}}</label>
+                                </div>
+                                @endforeach
+                               
+                            </div>
+                           
+                           
                             <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Role</button>
                         </form>
 

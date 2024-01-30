@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class RolesController extends Controller
 {
@@ -19,7 +20,7 @@ class RolesController extends Controller
     {
         $roles =  Role::all();
 
-        return view('backend.pages.roles.index',compact('roles'));
+        return view('backend.pages.roles.index', compact('roles'));
     }
 
     /**
@@ -29,8 +30,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $permission =  Permission::all();
-        return view('backend.pages.roles.create',compact('permission'));
+        $permissions =  Permission::all();
+        return view('backend.pages.roles.create', compact('permissions'));
     }
 
     /**
@@ -41,7 +42,15 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        $role = Role::create(['name' => $request->name]);
+        //    $role = DB::table('roles')->where('name',$request->name)->first();
+
+        $permissions = $request->input('permissions');
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+        return back();
     }
 
     /**
