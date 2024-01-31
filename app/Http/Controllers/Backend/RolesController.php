@@ -9,6 +9,11 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Validator;
+
+
+
+
 class RolesController extends Controller
 {
     /**
@@ -42,6 +47,14 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation Data 
+        $request->validate(
+            ['name' => 'required|max:100|unique:roles'],
+            ['name.required' => 'Please Give a Role Name']
+        );
+
+      
+        // proccess data
         $role = Role::create(['name' => $request->name]);
         //    $role = DB::table('roles')->where('name',$request->name)->first();
 
